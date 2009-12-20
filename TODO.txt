@@ -6,7 +6,7 @@ so when adding variables to the view it'll work inside the view file.  Include a
 so we can disable the rendering for ajax calls and what not etc.. Like KohanaPHP
 3. [X] Incorperate the view class into the template_controller and render the output.
 4. [X] Update __autoload to work with web controller libs
-5. Clean up code and add comments etc..
+5. [X] Clean up code and add comments etc..
 
 GOAL: Everything run off libraries: DB, RSS, etc.. Ultra Light. Minimum Work for this Mini Framework.  Be able
 to create any library, plug it in and work out the box with ease
