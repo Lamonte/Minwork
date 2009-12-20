@@ -24,6 +24,8 @@ class Minwork
 			$params      = Request::instance()->get("params", 1);
 			$params      = is_null($params) ? array() : $params;
 			
+			$tmp_cntrl  = false;
+			
 			if(!class_exists($_controller)) {
 				return null; //throw exception
 			}
@@ -31,8 +33,9 @@ class Minwork
 			//create object and load actions if available
 			$controller = new $_controller();
 			
-			if(!is_a($controller, 'Template_Controller')) {
-				return null; //throw exception
+			//if we're dealing with template class controllers
+			if(is_a($controller, 'Template_Controller')) {
+				$tmp_cntrl = true;
 			}
 			
 			if(is_null($action)) {
@@ -43,7 +46,12 @@ class Minwork
 				return null; //throw an exception
 			}
 			
-			return call_user_func_array(array($controller, $action), $params);
+			call_user_func_array(array($controller, $action), $params);
+			
+			//render template if template class
+			if($tmp_cntrl) {
+				$controller->__render();
+			}	
 		}
 	}
 }
