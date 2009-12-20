@@ -16,5 +16,18 @@ class Welcome_Controller extends Template_Controller
 	{
 		echo "Another page :D; don't forget about private functions and what not";
 	}
+	
+	public function view_test()
+	{
+		$this->view = new View('view_test');
+		$this->view->data = array(
+			'array' => 'of_data',
+			'this'  => 'is_pretty',
+			'cool'  => ':D'
+		);
+		
+		//$this->view->render();
+		echo $this->view;
+	}
 }
 ?>
