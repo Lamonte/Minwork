@@ -1,0 +1,8 @@
+Minwork is a light framework using PHP5, it has the basics of a MVC minus a lot.
+
+It focuses mostly on Controllers and Templates while libraries will be plug and play and control your whole script.
+There will be a database library packed with the final release, but there is no models like most traditional frameworks.
+
+My goal for this project is to: Have something light, VERY VERY VERY light weight and extendable.  I wanted something where controllers and views were the base and custom libraries finished the job.  That way if I wanted to make a simple application or a complete cms this base would be easy to work from.
+
+Check the TODO.txt file to see my current progress and what I need to do to complete my project
