@@ -9,6 +9,7 @@ so we can disable the rendering for ajax calls and what not etc.. Like KohanaPHP
 5. [X] Clean up code and add comments etc..
 
 6. [X] default controller - ADDED
+7. Add in 404 pages when error messages are turned off
 
 GOAL: Everything run off libraries: DB, RSS, etc.. Ultra Light. Minimum Work for this Mini Framework.  Be able
 to create any library, plug it in and work out the box with ease
