@@ -15,11 +15,15 @@ class Minwork
 	public function load_controllers()
 	{
 		$controller = Request::instance()->get("c", 1); 
+		$controller = is_null($controller) ? default_controller : $controller;
+		
 		if(!is_null($controller)) {
 			
+			//load controller class
 			$require_file = ROOTDIR . "web/controllers/" . strtolower($controller) . ".php";
 			
 			if(!file_exists($require_file)) {
+				throw new MinworkException("Controller file couldn't be found");
 				return null; //throw Exception
 			}
 			
@@ -30,9 +34,10 @@ class Minwork
 			$params      = Request::instance()->get("params", 1);
 			$params      = is_null($params) ? array() : $params;
 			
-			$tmp_cntrl  = false;
+			$tmp_cntrl   = false;
 			
 			if(!class_exists($_controller)) {
+				throw new MinworkException("Controller class $_controller does not exist");
 				return null; //throw exception
 			}
 			
@@ -49,6 +54,7 @@ class Minwork
 			}
 			
 			if(!method_exists($controller, $action)) {
+				throw new MinworkException("Controller method($action) does not exist");
 				return null; //throw an exception
 			}
 			
@@ -61,4 +67,3 @@ class Minwork
 		}
 	}
 }
-?>

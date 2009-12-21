@@ -1,6 +1,6 @@
 ﻿TODOLIST
 --------
-1. Add - Exception Classes to handle errors and what not.
+1. [X] Add - Exception Classes to handle errors and what not.
 2. [X] Develop a View core lib class that loads views as objects and handle __set calls 
 so when adding variables to the view it'll work inside the view file.  Include an auto_render = TRUE setting
 so we can disable the rendering for ajax calls and what not etc.. Like KohanaPHP
@@ -8,10 +8,13 @@ so we can disable the rendering for ajax calls and what not etc.. Like KohanaPHP
 4. [X] Update __autoload to work with web controller libs
 5. [X] Clean up code and add comments etc..
 
+6. [X] default controller - ADDED
+
 GOAL: Everything run off libraries: DB, RSS, etc.. Ultra Light. Minimum Work for this Mini Framework.  Be able
 to create any library, plug it in and work out the box with ease
 
 Future Ideas
 ------------
 1. htaccess with seo clean urls
-2. default controller
+2. default controller - ADDED
+3. Error logging

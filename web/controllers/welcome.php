@@ -25,6 +25,11 @@ class Welcome_Controller extends Template_Controller
 	public function main()
 	{
 		echo "This is the main controller page";
+		$this->template->data = array(
+			'array' => 'of_data',
+			'this'  => 'is_pretty',
+			'cool'  => ':D'
+		);
 	}
 	
 	public function another_page()
@@ -38,26 +43,12 @@ class Welcome_Controller extends Template_Controller
 	public function view_test()
 	{
 		$this->auto_render = false;
-		echo 'this shouldnt output data';
-		
-		/*
-		$this->view = new View('view_test');
-		$this->view->data = array(
-			'array' => 'of_data',
-			'this'  => 'is_pretty',
-			'cool'  => ':D'
-		);
-		
-		//$this->view->render();
-		echo $this->view;
-		
-		*/
+		echo 'this shouldnt output template data';
 		$this->template->data = array(
 			'array' => 'of_data',
 			'this'  => 'is_pretty',
 			'cool'  => ':D'
 		);
-		echo $this->template; //__toString View class outputs the html
+		//echo $this->template; //__toString View class outputs the html
 	}
 }
-?>

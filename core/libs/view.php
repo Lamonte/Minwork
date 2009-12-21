@@ -10,13 +10,16 @@ class View
 	private $_data        = array();
 	private $_view        = null;
 	private $_render_data = null;
+	private $_throw_excep = true;
 	
 	/**
 	 * Setup some class defaults
 	 */
-	public function __construct($view = 'template')
+	public function __construct($view = 'template', $throw_exception = true)
 	{
 		$this->_view = $view;
+		$this->_throw_excep = $throw_exception; //do you want to hard check if the file exists
+							//main use is for using this class in none controllers/views
 	}
 	
 	/**
@@ -51,8 +54,10 @@ class View
 		
 		//Try loading the view file then outputting it to the screen
 		if(!file_exists(ROOTDIR . "web/views/" . $this->_view . ".php")) {
+			if($this->_throw_excep == false) {
+				return false;
+			}
 			//TODO: Throw exception
-			return false;
 		}
 		
 		//Save the html in a file
