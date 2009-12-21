@@ -7,11 +7,10 @@
  
 class View
 {
-	private $_data        = array();
+	public  $_data        = array();
 	private $_view        = null;
 	private $_render_data = null;
 	private $_throw_excep = true;
-	
 	/**
 	 * Setup some class defaults
 	 */
@@ -32,6 +31,17 @@ class View
 	public function __set($key, $val) {
 		//TODO: throw in exception if key is a class variable
 		$this->_data[$key] = $val;
+		//echo "(" . $key . ":" . $val . ")";
+	}
+	
+	/**
+	 * This is required so when say you want to reassign data or add new data to an
+	 * already created variable, this is required to get access to that data from outside
+	 * access.
+	 */
+	public function __get($key)
+	{
+		return $this->_data[$key];
 	}
 	
 	/**
@@ -51,7 +61,6 @@ class View
 	 */
 	public function render($return = false)
 	{
-		
 		//Try loading the view file then outputting it to the screen
 		if(!file_exists(ROOTDIR . "web/views/" . $this->_view . ".php")) {
 			if($this->_throw_excep == false) {
