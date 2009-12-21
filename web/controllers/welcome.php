@@ -7,7 +7,8 @@
  
 class Welcome_Controller extends Template_Controller
 {
-	public $template = 'view_test'; //template file when loading template
+	//Default template wrapping file
+	public $template = 'template'; 
 	
 	/**
 	 * Must call parent construct for template controller to work
@@ -20,7 +21,8 @@ class Welcome_Controller extends Template_Controller
 	}
 	
 	/**
-	 * Default controller, Required
+	 * Default controller, Required (Don't need to define the "a")
+	 * Ex. http://localhost/minwork/index.php?c=welcome
 	 */
 	public function main()
 	{
@@ -32,7 +34,11 @@ class Welcome_Controller extends Template_Controller
 		);
 	}
 	
-	public function another_page()
+	/**
+	 * Another example page
+	 * Ex. http://localhost/minwork/index.php?c=welcome&a=another_page
+	 */
+	public function another_page() 
 	{
 		echo "Another page :D; don't forget about private functions and what not";
 	}

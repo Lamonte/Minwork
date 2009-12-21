@@ -28,10 +28,9 @@ class View
 	 *
 	 * @return	void
 	 */
-	public function __set($key, $val) {
-		//TODO: throw in exception if key is a class variable
+	public function __set($key, $val) 
+	{
 		$this->_data[$key] = $val;
-		//echo "(" . $key . ":" . $val . ")";
 	}
 	
 	/**
@@ -66,7 +65,7 @@ class View
 			if($this->_throw_excep == false) {
 				return false;
 			}
-			//TODO: Throw exception
+			throw new MinworkException("Couldn't load view file: '{$this->_view}'");
 		}
 		
 		//Save the html in a file

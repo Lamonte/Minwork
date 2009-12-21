@@ -10,6 +10,10 @@ class Request
 	public static $_Instance = null;
 	private function __construct() {}
 	
+	/**
+	 * Singleton Pattern - Must always call this function 
+	 * Ex. Request::instance()->get("url");
+	 */
 	static public function instance()
 	{
 		if(is_null(self::$_Instance)) {
@@ -20,33 +24,30 @@ class Request
 	
 	public function get($data, $xss = false)
 	{
+		//clean data
 		if (is_array($_GET)) {
 			foreach ($_GET as $key => $val) {
-				// Sanitize $_GET
 				$_GET[$key] = $this->clean_input_data($val);
 			}
 		} else {
 			$_GET = array();
 		}
 		
+		//setup data
 		if(isset($_GET[$data])) {
-			
 			$data = $_GET[$data];
-			
 			if($xss === true) {
 				$data = $this->remove_xss($data);
 			}
-			
 			return $data;
-		
-		} else {
-			return null;
 		}
 		
+		return null;
 	}
 	
 	public function post($data, $xss = false)
 	{
+		//clean data
 		if (is_array($_POST)) {
 			foreach ($_POST as $key => $val) {
 				// Sanitize $_POST
@@ -56,30 +57,32 @@ class Request
 			$_POST = array();
 		}
 		
+		//setup data
 		if(isset($_POST[$data])) {
-			
 			$data = $_POST[$data];
 			if($xss === true) {
 				$data = $this->remove_xss($_POST[$data]);
 			}
-			
 			return $data;
-		
-		} else {
-			return null;
 		}
-	
+		
+		return null;
 	}
 	
+	/**
+	 * Clean input data
+	 */
 	private function clean_input_data($data)
 	{
 		if (get_magic_quotes_gpc()) {
 			$data = stripslashes($data);
 		}
-		
 		return $data;
 	}
 	
+	/**
+	 * Class I stole from Kohanaphp that cleans out any xss invulnerabilities
+	 */
 	private function remove_xss($data)
 	{
 		// http://svn.bitflux.ch/repos/public/popoon/trunk/classes/externalinput.php
