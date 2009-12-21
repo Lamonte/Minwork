@@ -17,7 +17,13 @@ class Minwork
 		$controller = Request::instance()->get("c", 1); 
 		if(!is_null($controller)) {
 			
-			require_once ROOTDIR . "web/controllers/" . strtolower($controller) . ".php";
+			$require_file = ROOTDIR . "web/controllers/" . strtolower($controller) . ".php";
+			
+			if(!file_exists($require_file)) {
+				return null; //throw Exception
+			}
+			
+			require_once $require_file;
 			
 			$_controller = ucfirst($controller) . '_Controller';
 			$action      = Request::instance()->get("a", 1);
