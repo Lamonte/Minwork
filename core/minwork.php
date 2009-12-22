@@ -32,7 +32,7 @@ class Minwork
 			$_controller = ucfirst($controller) . '_Controller';
 			$action      = Request::instance()->get("a", 1);
 			$params      = Request::instance()->get("params", 1);
-			$params      = is_null($params) ? array() : $params;
+			$params      = is_null($params) ? array() : @explode(",", $params);
 			
 			$tmp_cntrl   = false;
 			
