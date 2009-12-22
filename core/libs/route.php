@@ -45,6 +45,7 @@ class Route
 				$_mask = str_replace($tmp_key, $val, $_mask);
 			}
 			
+			//do the actual remapping!
 			if(preg_match("/" . $_mask . "/i", $uri, $matches)) {
 				if(isset($matches[0])) unset($matches[0]);
 				foreach($matches as $key => $val) {

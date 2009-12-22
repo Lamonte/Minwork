@@ -16,7 +16,7 @@ to create any library, plug it in and work out the box with ease
 Future Ideas
 ------------
 1. [X] htaccess with seo clean urls
-	1. Incorporate the .htaccess file!
+	[X] 1. Incorporate the .htaccess file!
 2. [X] default controller - ADDED
 3. Error logging
 

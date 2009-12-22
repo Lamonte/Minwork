@@ -63,6 +63,10 @@ class Welcome_Controller extends Template_Controller
 	 */
 	public function contact()
 	{
-		echo "Hello, this is the contact route http://localhost/minwork/index.php/contact.html";
+		echo "Hello, this is the contact route http://localhost/minwork/contact.html";
+		echo "<form method='post' action='http://localhost/minwork/contact.html'><input type='test' name='data'><input type='submit' value='submit' /></form>";
+		if($_POST) {
+			print_r($_POST);
+		}
 	}
 }
