@@ -57,4 +57,12 @@ class Welcome_Controller extends Template_Controller
 		);
 		//echo $this->template; //__toString View class outputs the html
 	}
+	
+	/**
+	 * Example of the contact route
+	 */
+	public function contact()
+	{
+		echo "Hello, this is the contact route http://localhost/minwork/index.php/contact.html";
+	}
 }
