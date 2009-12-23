@@ -36,7 +36,7 @@ class Minwork
 			$tmp_cntrl   = false;
 			
 			if(!class_exists($_controller)) {
-				throw new MinworkException("Controller class $_controller does not exist");
+				throw new MinworkException("Controller class '".$_controller."' does not exist");
 			}
 			
 			//create object and load actions if available
