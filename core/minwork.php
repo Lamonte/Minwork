@@ -24,7 +24,6 @@ class Minwork
 			
 			if(!file_exists($require_file)) {
 				throw new MinworkException("Controller file couldn't be found");
-				return null; //throw Exception
 			}
 			
 			require_once $require_file;
@@ -38,7 +37,6 @@ class Minwork
 			
 			if(!class_exists($_controller)) {
 				throw new MinworkException("Controller class $_controller does not exist");
-				return null; //throw exception
 			}
 			
 			//create object and load actions if available
@@ -55,7 +53,6 @@ class Minwork
 			
 			if(!method_exists($controller, $action)) {
 				throw new MinworkException("Controller action '$action' does not exist");
-				return null; //throw an exception
 			}
 			
 			if(preg_match("/^_/i", $action)) {
