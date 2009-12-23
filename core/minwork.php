@@ -50,7 +50,7 @@ class Minwork
 			}
 			
 			if(is_null($action)) {
-				$action = "main";
+				$action = default_action;
 			}
 			
 			if(!method_exists($controller, $action)) {
