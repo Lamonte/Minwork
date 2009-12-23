@@ -17,6 +17,7 @@ require_once ROOTDIR . "web/bootstrap.php";
 
 //Minwork object has loaded :P
 $Minwork = new Minwork();
+
 try {
 
 //load controllers

@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Installation directory
-RewriteBase /minwork/
+RewriteBase /minwork_lib/
 
 # Protect application and system files from being viewed
 RewriteRule ^(core|web) - [F,L]

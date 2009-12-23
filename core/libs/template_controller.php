@@ -3,13 +3,17 @@ class Template_Controller
 {
 	public $template = 'template'; //default template file
 	public $auto_render = true;    //check: __render() function
+	public $db = null;
 	
 	/**
 	 * Load default template
 	 */
 	public function __construct()
 	{
+		global $db;
+		
 		$this->template = new View($this->template);
+		$this->db = $db;
 	}
 	
 	/**

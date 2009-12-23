@@ -22,7 +22,7 @@ class Welcome_Controller extends Template_Controller
 	
 	/**
 	 * Default controller, Required (Don't need to define the "a")
-	 * Ex. http://localhost/minwork/index.php?c=welcome
+	 * Ex. http://localhost/minwork/index.php/welcome/
 	 */
 	public function main()
 	{
@@ -34,9 +34,40 @@ class Welcome_Controller extends Template_Controller
 		);
 	}
 	
+	/** 
+	 * Example of the database library
+	 */
+	public function insert_comment()
+	{
+		//saves new row in the database
+		$comment = new Comment_Model();
+		$comment->name = "Lamonte";
+		$comment->comment = "This is a test comment X";
+		$comment->save();
+		
+		/** MySQL Table for this to work
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM
+		*/
+		
+		//Also check out the models folder
+		//PS:: Open config.php to enable to use of the models/database class and 
+		//insert your database details
+		
+		/*
+		$comment = Model::factory('comment');
+		$comment->name = "Lamonte_test";
+		$comment->save();
+		*/
+	}
+	
 	/**
 	 * Another example page
-	 * Ex. http://localhost/minwork/index.php?c=welcome&a=another_page
+	 * Ex. http://localhost/minwork/index.php/welcome/another_page/
 	 */
 	public function another_page() 
 	{
@@ -64,7 +95,7 @@ class Welcome_Controller extends Template_Controller
 	public function contact()
 	{
 		echo "Hello, this is the contact route http://localhost/minwork/contact.html";
-		echo "<form method='post' action='http://localhost/minwork/contact.html'><input type='test' name='data'><input type='submit' value='submit' /></form>";
+		echo "<form method='post' action='http://localhost/minwork_lib/contact.html'><input type='test' name='data'><input type='submit' value='submit' /></form>";
 		if($_POST) {
 			print_r($_POST);
 		}

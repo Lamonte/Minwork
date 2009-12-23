@@ -32,8 +32,13 @@ class Route
 	
 	public function start_remapping()
 	{	
-		//remapp url masks
+		//start basic remapping
+		$this->basic_remapping();
+		
+		//remap url masks
 		$uri = implode("/", Uri::instance()->split_segments($_SERVER['REQUEST_URI']));
+		if(empty($uri)) return;
+		
 		foreach(self::$_Masks as $mask) {
 		
 			//prep regex
@@ -51,6 +56,7 @@ class Route
 				foreach($matches as $key => $val) {
 					$mask[1] = str_replace("$" . $key, $val, $mask[1]);
 				}
+				
 				$real_uri = Uri::instance()->split_segments($mask[1]);
 				
 				$_GET['c'] = $real_uri[0];
@@ -63,5 +69,17 @@ class Route
 			}	
 		}
 		
+	}
+	
+	public function basic_remapping()
+	{
+		$real_uri = Uri::instance()->split_segments($_SERVER['REQUEST_URI']);
+		$_GET['c'] = $real_uri[0];
+		$_GET['a'] = $real_uri[1];
+		
+		unset($real_uri[0]);
+		unset($real_uri[1]);
+		
+		$_GET['params'] = implode(",", $real_uri);
 	}
 }

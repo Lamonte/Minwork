@@ -28,6 +28,7 @@ class Uri
 	public function segments($segment = null) // 0 = first segment
 	{
 		$uri = $_SERVER['REQUEST_URI'];
+		
 		$uri = $this->split_segments($uri);
 		
 		if(is_null($segment)) {
@@ -38,12 +39,14 @@ class Uri
 			return $uri[$segment];
 		}
 		
-		return null;
+		return array();
 	}
 	
 	public function split_segments($uri)
 	{
 		//strip url to just segments: /controller/action/params
+		$save_uri = $uri;
+		
 		$uri = preg_replace("/.*?\/index\.php/i", "", $uri);
 		$uri = preg_replace("/\?.*/i", "", $uri);
 		$uri = preg_replace("/\/$/i", "", $uri);
@@ -51,7 +54,19 @@ class Uri
 		$uri = trim($uri);
 		
 		//split segments into an array
-		$uri = empty($uri) ? null : @explode("/", $uri);
+		$uri = empty($uri) ? array() : @explode("/", $uri);
+		
+		if(!preg_match("/.*?\/index\.php/i", $save_uri)) {
+			if(is_array($uri) && count($uri) > 0) {
+				unset($uri[0]);
+			}
+			$new_uri = array();
+			foreach($uri as $u) {
+				$new_uri[] = $u;
+			}
+			$uri = $new_uri;
+		}
+		
 		return $uri;
 	}
 	
