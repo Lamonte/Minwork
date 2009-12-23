@@ -3,13 +3,9 @@
 define("ROOTDIR", str_replace("\\", "/", dirname(__FILE__)) . "/");
 require_once ROOTDIR . "web/config.php";
 
-function __autoload($class_name) {
-	if(file_exists(ROOTDIR . "core/libs/" . strtolower($class_name) . ".php")) {
-		require_once ROOTDIR . "core/libs/" . strtolower($class_name) . ".php";
-	} else	if(file_exists(ROOTDIR . "web/libs/" . strtolower($class_name) . ".php")) {
-		require_once ROOTDIR . "web/libs/" . strtolower($class_name) . ".php";
-	}
-}
+//new autoloading
+require_once ROOTDIR . "core/autoload.php";
+require_once ROOTDIR . "web/autoload.php";
 
 //Require any core classes or files
 require_once ROOTDIR . "core/minwork.php";
