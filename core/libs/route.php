@@ -74,8 +74,8 @@ class Route
 	public function basic_remapping()
 	{
 		$real_uri = Uri::instance()->split_segments($_SERVER['REQUEST_URI']);
-		$_GET['c'] = $real_uri[0];
-		$_GET['a'] = $real_uri[1];
+		$_GET['c'] = isset($real_uri[0]) ? $real_uri[0] : null;
+		$_GET['a'] = isset($real_uri[1]) ? $real_uri[1] : null;
 		
 		unset($real_uri[0]);
 		unset($real_uri[1]);
