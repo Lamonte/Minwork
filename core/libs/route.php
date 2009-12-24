@@ -58,7 +58,7 @@ class Route
 				}
 				
 				$real_uri = Uri::instance()->split_segments($mask[1]);
-				print_r($real_uri);
+				
 				$_GET['c'] = $real_uri[0];
 				$_GET['a'] = $real_uri[1];
 				
