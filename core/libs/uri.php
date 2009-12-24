@@ -29,7 +29,7 @@ class Uri
 	{
 		$uri = $_SERVER['REQUEST_URI'];
 		
-		$uri = $this->split_segments($uri);
+		$uri = $this->split_segments($uri, true);
 		
 		if(is_null($segment)) {
 			return $uri;
@@ -42,7 +42,7 @@ class Uri
 		return array();
 	}
 	
-	public function split_segments($uri)
+	public function split_segments($uri, $check_index = false)
 	{
 		//strip url to just segments: /controller/action/params
 		$save_uri = $uri;
@@ -56,7 +56,7 @@ class Uri
 		//split segments into an array
 		$uri = empty($uri) ? array() : @explode("/", $uri);
 		
-		if(!preg_match("/.*?\/index\.php/i", $save_uri)) {
+		if(!preg_match("/.*?\/index\.php/i", $save_uri) && $check_index == true) {
 			if(is_array($uri) && count($uri) > 0) {
 				unset($uri[0]);
 			}

@@ -54,11 +54,11 @@ class Route
 			if(preg_match("/" . $_mask . "/i", $uri, $matches)) {
 				if(isset($matches[0])) unset($matches[0]);
 				foreach($matches as $key => $val) {
-					$mask[1] = str_replace("$" . $key, $val, $mask[1]);
+					$mask[1] = str_replace('$' . $key, $val, $mask[1]);
 				}
 				
 				$real_uri = Uri::instance()->split_segments($mask[1]);
-				
+				print_r($real_uri);
 				$_GET['c'] = $real_uri[0];
 				$_GET['a'] = $real_uri[1];
 				
@@ -73,7 +73,7 @@ class Route
 	
 	public function basic_remapping()
 	{
-		$real_uri = Uri::instance()->split_segments($_SERVER['REQUEST_URI']);
+		$real_uri = Uri::instance()->split_segments($_SERVER['REQUEST_URI'], true);
 		$_GET['c'] = isset($real_uri[0]) ? $real_uri[0] : null;
 		$_GET['a'] = isset($real_uri[1]) ? $real_uri[1] : null;
 		
