@@ -74,4 +74,10 @@ class Uri
 	{
 		return count(Uri::segments());
 	}
+	
+	public function base()
+	{
+		global $config;
+		return (isset($config['uri']) && isset($config['uri']['base']) ? $config['uri']['base'] : null);
+	}
 }
