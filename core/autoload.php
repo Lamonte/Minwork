@@ -16,8 +16,8 @@ function load_web_libs($class_name) {
 //RapidDataMapping.com
 function load_db_classes($class_name)
 {
-	if(file_exists(ROOTDIR . "web/libs/Db/" . str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, str_replace("Db_" , '', $class_name)).'.php')) {
-		require_once ROOTDIR . "web/libs/Db/" . str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, str_replace("Db_" , '', $class_name)).'.php';
+	if(file_exists(ROOTDIR . "core/libs/Db/" . str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, str_replace("Db_" , '', $class_name)).'.php')) {
+		require_once ROOTDIR . "core/libs/Db/" . str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, str_replace("Db_" , '', $class_name)).'.php';
 	}
 }
 
@@ -30,8 +30,15 @@ function load_models($class)
 
 function load_model_descriptors($class)
 {
-	if(file_exists(ROOTDIR . "web/models/" . strtolower(str_replace("_", "/", $class)) . ".php")) {
-		require ROOTDIR . "web/models/" . strtolower(str_replace("_", "/", $class)) . ".php"; //web/models/comment/modeldescriptor.php
+	//fixed longer named models
+	$class_old = str_replace("_", "/", $class);
+	$class_old = @explode("/", $class_old);
+	$saved = end($class_old);
+	array_pop($class_old);
+	$class = implode("_", $class_old) . "/" . $saved;
+	
+	if(file_exists(ROOTDIR . "web/models/" . strtolower($class) . ".php")) {
+		require ROOTDIR . "web/models/" . strtolower($class) . ".php"; //web/models/comment/modeldescriptor.php
 	}
 }
 
