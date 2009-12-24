@@ -20,4 +20,4 @@ $config['db']['tble'] = '';          //Database table name
 $config['db']['host'] = 'localhost'; //Database hostname
 $config['db']['conn'] = 'default'; //keep this default unless you know what you're doing
 
-$config['uri']['base'] = 'http://localhost/minwork'; //base url for framework application Uri::base()
+$config['uri']['base'] = 'http://localhost/minwork/'; //base url for framework application Uri::base()

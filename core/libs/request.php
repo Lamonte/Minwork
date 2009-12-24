@@ -22,6 +22,11 @@ class Request
 		return self::$_Instance;
 	}
 	
+	public function _()
+	{
+		return self::instance();
+	}
+	
 	public function get($data, $xss = false)
 	{
 		//clean data
@@ -77,6 +82,9 @@ class Request
 		if (get_magic_quotes_gpc()) {
 			$data = stripslashes($data);
 		}
+		
+		$data = trim($data);
+		
 		return $data;
 	}
 	
