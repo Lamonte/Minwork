@@ -19,18 +19,33 @@ class Uri
 		return self::$_Instance;
 	}	
 	
+	/**
+	 * Checks if request uri has any controller/action/params segments
+	 *
+	 * @return	bool
+	 */
 	public function has_segments()
 	{
-		if(Uri::count_segments() == 0) return false;
+		if(Uri::count_segments() == 0) {
+			return false;
+		}
 		return true;
 	}
 	
+	/**
+	 * Grabs uri segment, it not defined returns
+	 * an array of the request uri segment controller/action/params
+	 *
+	 * @return	mixed
+	 */
 	public function segments($segment = null) // 0 = first segment
 	{
 		$uri = $_SERVER['REQUEST_URI'];
 		
 		$uri = $this->split_segments($uri, true);
 		
+		//I don't use empty() because I want to check
+		//if were actually returning the whole array
 		if(is_null($segment)) {
 			return $uri;
 		}
@@ -42,9 +57,15 @@ class Uri
 		return array();
 	}
 	
+	/**
+	 * Strip string into an array of segments
+	 *
+	 * @param	string
+	 * @param	bool	default - false
+	 * @return	array
+	 */
 	public function split_segments($uri, $check_index = false)
 	{
-		//strip url to just segments: /controller/action/params
 		$save_uri = $uri;
 		
 		$uri = preg_replace("/.*?\/index\.php/i", "", $uri);
@@ -70,14 +91,27 @@ class Uri
 		return $uri;
 	}
 	
+	/**
+	 * Count's total segments in a url
+	 * Ex. controller/action/param1/param2 the output would be
+	 * 4 after splitting the "/" from the segments
+	 *
+	 * @return	integer
+	 */
 	public function count_segments()
 	{
 		return count(Uri::segments());
 	}
 	
+	/**
+	 * Returns the base url set in the config
+	 *
+	 * @return	string
+	 */
 	public function base()
 	{
 		global $config;
-		return (isset($config['uri']) && isset($config['uri']['base']) ? $config['uri']['base'] : null);
+		return (isset($config['uri']) && isset($config['uri']['base']) 
+			? $config['uri']['base'] : null);
 	}
 }

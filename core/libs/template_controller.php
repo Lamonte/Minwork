@@ -3,7 +3,7 @@ class Template_Controller
 {
 	public $template = 'template'; //default template file
 	public $auto_render = true;    //check: __render() function
-	public $db = null;
+	public $db = null;             //database variable to use globally in all extended controllers
 	
 	/**
 	 * Load default template

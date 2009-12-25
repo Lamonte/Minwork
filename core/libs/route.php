@@ -37,7 +37,10 @@ class Route
 		
 		//remap url masks
 		$uri = implode("/", Uri::instance()->split_segments($_SERVER['REQUEST_URI']));
-		if(empty($uri)) return;
+		
+		if(empty($uri)) { 
+			return;
+		}
 		
 		foreach(self::$_Masks as $mask) {
 		
@@ -47,39 +50,59 @@ class Route
 			
 			foreach(self::$_Regex as $key => $val) {
 				$tmp_key = preg_quote($key, '/');
-				$_mask = str_replace($tmp_key, $val, $_mask);
+				$_mask   = str_replace($tmp_key, $val, $_mask);
 			}
 			
 			//do the actual remapping!
 			if(preg_match("/" . $_mask . "/i", $uri, $matches)) {
-				if(isset($matches[0])) unset($matches[0]);
+			
+				if(isset($matches[0])) {
+					unset($matches[0]);
+				}
+				
 				foreach($matches as $key => $val) {
 					$mask[1] = str_replace('$' . $key, $val, $mask[1]);
 				}
 				
 				$real_uri = Uri::instance()->split_segments($mask[1]);
 				
-				$_GET['c'] = $real_uri[0];
-				$_GET['a'] = $real_uri[1];
+				$_GET['c'] = isset($real_uri[0]) ? $real_uri[0] : null;
+				$_GET['a'] = isset($real_uri[1]) ? $real_uri[1] : null;
 				
 				unset($real_uri[0]);
 				unset($real_uri[1]);
 				
-				$_GET['params'] = implode(",", $real_uri);
+				if(is_array($real_uri)) {
+					$_GET['params'] = implode(",", $real_uri);
+				}
 			}	
 		}
 		
 	}
 	
+	/**
+	 * Remap basic controller routes if using the
+	 * clean url way of doing things.
+	 *
+	 * @return	void
+	 */
 	public function basic_remapping()
 	{
 		$real_uri = Uri::instance()->split_segments($_SERVER['REQUEST_URI'], true);
+		
+		//Get out if no remapping is needed
+		if(empty($real_uri)) {
+			return;
+		}	
+		
 		$_GET['c'] = isset($real_uri[0]) ? $real_uri[0] : null;
 		$_GET['a'] = isset($real_uri[1]) ? $real_uri[1] : null;
 		
 		unset($real_uri[0]);
 		unset($real_uri[1]);
 		
-		$_GET['params'] = implode(",", $real_uri);
+		if(is_array($real_uri)) {
+			$_GET['params'] = implode(",", $real_uri);
+		}
 	}
 }

@@ -68,13 +68,12 @@ class View
 			throw new MinworkException("Couldn't load view file: '{$this->_view}'");
 		}
 		
-		//Save the html in a file
+		//Save the html in a variable
 		ob_start();
 		
-		extract($this->_data);
-		
-		include_once ROOTDIR . "web/views/" . $this->_view . ".php";
-		$this->_render_data = ob_get_contents();
+			extract($this->_data);
+			include_once ROOTDIR . "web/views/" . $this->_view . ".php";
+			$this->_render_data = ob_get_contents();
 		
 		ob_end_clean();
 		
