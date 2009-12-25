@@ -55,7 +55,7 @@ class Minwork
 			}
 			
 			if(preg_match("/^_/i", $action)) {
-				throw new MinworkException("Cannot access private method via uri");
+				throw new MinworkException("Cannot access private method '$action' via uri");
 			}
 			
 			call_user_func_array(array($controller, $action), $params);
